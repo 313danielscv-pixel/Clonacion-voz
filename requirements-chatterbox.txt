@@ -1,0 +1,5 @@
+chatterbox-tts==0.1.7
+sounddevice
+matplotlib
+setuptools<81
+ipykernel

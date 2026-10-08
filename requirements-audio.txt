@@ -1,0 +1,6 @@
+yt-dlp
+numpy
+pandas
+matplotlib
+soundfile
+ipykernel

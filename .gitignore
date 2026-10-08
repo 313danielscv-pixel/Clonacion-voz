@@ -1,0 +1,24 @@
+# Entornos y archivos temporales
+.venv*/
+venv/
+__pycache__/
+.ipynb_checkpoints/
+*.py[cod]
+.env
+
+# Configuración local con rutas o enlaces propios
+config.py
+
+# Datos, modelos y resultados locales
+datos/
+audios/
+audios_canto/
+seed-vc/
+checkpoints/
+*.wav
+*.mp3
+*.mp4
+*.m4a
+*.flac
+*.ytdl
+*.part
