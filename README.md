@@ -23,16 +23,33 @@ Los cuadernos guardan las grabaciones y resultados en el equipo. No se suben al 
 
 También puedes usar `01_descargar_video_extraer_audio.ipynb` con una fuente permitida; copia el WAV que genere a `entradas/mezcla.wav` para continuar con la conversión cantada.
 
+## Aplicación local Lluvia de estrellas
+
+La app permite cargar una pista de audio (o un vídeo con audio), cargar o grabar una referencia vocal, elegir el registro y el balance, y escuchar una previsualización de hasta dos minutos con esos ajustes antes de crear la mezcla completa. `Manteniendo` conserva la altura de la canción; `Como varón` la baja cinco semitonos y `Como mujer` la sube cinco. El timbre de destino sigue dependiendo de la voz de referencia. También puede limpiar y normalizar la referencia y descargar el resultado WAV. La pista puede durar hasta cinco minutos y cada archivo puede ocupar hasta 200 MB. La conversión cantada sigue usando Seed-VC y la separación Demucs.
+
+Con el entorno `.venv-canto` preparado según la sección siguiente, instala Streamlit y arranca la app desde la raíz del proyecto:
+
+```powershell
+.\.venv-canto\Scripts\Activate.ps1
+python -m pip install -r requirements-app.txt
+python -m streamlit run app.py --server.address 127.0.0.1
+```
+
+La primera ejecución puede descargar los modelos. La app solo escucha en `127.0.0.1` y no envía audios a servicios externos. Las copias de trabajo se eliminan al terminar cada mezcla; los archivos cargados y el resultado permanecen en la memoria de la sesión local hasta que esta expire. No está configurada para despliegue público: antes de abrirla a otras personas habría que añadir límites de uso, privacidad, control de concurrencia y medidas contra abuso. Cambiar semitonos modifica el registro, pero no garantiza por sí solo una identidad vocal masculina o femenina; el timbre objetivo depende de la referencia.
+
 ## Contenido
 
 | Archivo | Para qué sirve |
 | --- | --- |
+| `app.py` | Interfaz local de Streamlit para convertir y mezclar audio. |
+| `audio_pipeline.py` | Lógica común de preparación, limpieza, separación, conversión y mezcla. |
 | `01_descargar_video_extraer_audio.ipynb` | Consultar una fuente permitida y extraer una pista WAV mono a 16 kHz. También admite archivos locales. |
 | `02_clonar_voz_chatterbox.ipynb` | Generar voz hablada a partir de texto y una muestra propia o autorizada. |
 | `03_convertir_voz_cantada_seedvc.ipynb` | Separar voz e instrumental, convertir el timbre y mezclar el resultado. |
 | `requirements-audio.txt` | Dependencias para el flujo de descarga y extracción. |
 | `requirements-chatterbox.txt` | Dependencias del cuaderno Chatterbox. |
 | `requirements-canto.txt` | Dependencias del flujo de Seed-VC y Demucs. |
+| `requirements-app.txt` | Streamlit para la interfaz local. |
 | `requirements-nvidia-gpu.txt` | PyTorch con CUDA 12.4 para equipos con GPU NVIDIA. |
 | `config_example.py` | Configuración pública sin enlaces privados. |
 
@@ -110,3 +127,7 @@ Los PDF e imágenes del material de referencia no se redistribuyen aquí. La exp
 - [yt-dlp](https://github.com/yt-dlp/yt-dlp) y [FFmpeg](https://ffmpeg.org/).
 
 Consulta las licencias y condiciones vigentes de cada proyecto antes de redistribuir software, modelos o audio generado.
+
+## Licencia del proyecto
+
+El código, los cuadernos originales y la documentación de este repositorio son propietarios y están reservados a DaVocalis. No se concede una licencia abierta para usarlos, copiarlos, modificarlos o redistribuirlos; cualquier permiso requiere autorización previa por escrito. Consulta [LICENSE](./LICENSE). Los componentes y modelos de terceros mantienen sus propias licencias y condiciones.
