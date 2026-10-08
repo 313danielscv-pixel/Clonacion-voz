@@ -11,6 +11,7 @@ config.py
 
 # Datos, modelos y resultados locales
 datos/
+entradas/
 audios/
 audios_canto/
 seed-vc/
@@ -20,5 +21,12 @@ checkpoints/
 *.mp4
 *.m4a
 *.flac
+*.ogg
+*.aac
+*.opus
+*.webm
+*.mov
+*.avi
+*.mkv
 *.ytdl
 *.part

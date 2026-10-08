@@ -14,6 +14,15 @@ Fuente de audio autorizada
 
 Los cuadernos guardan las grabaciones y resultados en el equipo. No se suben al repositorio voces de referencia, canciones, vídeos, modelos ni resultados generados.
 
+## Uso rápido con tu voz y una mezcla
+
+1. Crea la carpeta `entradas/` en la raíz del proyecto y coloca ahí una mezcla que tenga voz e instrumentos, por ejemplo `entradas/mezcla.wav`. Puedes usar WAV u otro formato que FFmpeg/librosa pueda leer.
+2. Graba tu voz en el cuaderno Chatterbox o coloca una grabación propia en `entradas/mi_voz.wav`. Para importar otro archivo desde Chatterbox, cambia `IMPORTAR` en su celda de grabación. Los dos cuadernos usan `entradas/mi_voz.wav` como referencia común.
+3. Ejecuta `03_convertir_voz_cantada_seedvc.ipynb` de arriba abajo en su entorno Python. Demucs separa la voz del acompañamiento; Seed-VC convierte la voz y el cuaderno la mezcla de nuevo.
+4. Escucha el resultado en `audios_canto/05_cancion_con_mi_voz.wav`. Para procesar otra mezcla, reemplaza `entradas/mezcla.wav` o cambia la variable `CANCION`.
+
+También puedes usar `01_descargar_video_extraer_audio.ipynb` con una fuente permitida; copia el WAV que genere a `entradas/mezcla.wav` para continuar con la conversión cantada.
+
 ## Contenido
 
 | Archivo | Para qué sirve |
@@ -68,7 +77,7 @@ python -m pip install -r requirements-chatterbox.txt
 python -m ipykernel install --user --name clonacion-voz
 ```
 
-Abre `02_clonar_voz_chatterbox.ipynb` en VS Code con la extensión Jupyter y selecciona el kernel `clonacion-voz`. La primera carga descarga los pesos del modelo y requiere espacio y conexión. El cuaderno puede grabar con el micrófono o importar una referencia; los WAV se guardan en `audios/`.
+Abre `02_clonar_voz_chatterbox.ipynb` en VS Code con la extensión Jupyter y selecciona el kernel `clonacion-voz`. La primera carga descarga los pesos del modelo y requiere espacio y conexión. El cuaderno puede grabar con el micrófono o importar una referencia; guarda la muestra compartida en `entradas/mi_voz.wav` y los WAV generados en `audios/`.
 
 ### 3. Convertir voz cantada con Seed-VC
 
@@ -82,11 +91,11 @@ python -m pip install -r requirements-canto.txt
 python -m ipykernel install --user --name conversion-canto
 ```
 
-Abre `03_convertir_voz_cantada_seedvc.ipynb` en VS Code con la extensión Jupyter y selecciona el kernel `conversion-canto`. Al ejecutar la celda de preparación, Seed-VC se descarga en `seed-vc/` si aún no está instalado; la primera inferencia también descarga pesos. Coloca una fuente autorizada en `datos/audio/cancion_entrada.wav` o cambia la variable `CANCION` por una ruta local. El cuaderno utiliza `audios/02_estilo_expresivo.wav` como referencia cuando está disponible y, si no, permite grabar una referencia.
+Abre `03_convertir_voz_cantada_seedvc.ipynb` en VS Code con la extensión Jupyter y selecciona el kernel `conversion-canto`. Al ejecutar la celda de preparación, Seed-VC se descarga en `seed-vc/` si aún no está instalado; la primera inferencia también descarga pesos. Coloca una mezcla autorizada en `entradas/mezcla.wav` o cambia la variable `CANCION` por una ruta local. La referencia por defecto es `entradas/mi_voz.wav`; si no existe, el cuaderno permite grabarla.
 
 ## Datos y uso responsable
 
-Las carpetas `datos/`, `audios/`, `audios_canto/`, los entornos y los modelos están ignorados por Git. No añadas grabaciones ni canciones a un commit. Usa tu propia voz o una voz para la que tengas consentimiento; respeta los derechos de las canciones y las condiciones de cada plataforma. Identifica el audio sintético como generado y no suplantes a otras personas.
+Las carpetas `entradas/`, `datos/`, `audios/`, `audios_canto/`, los entornos y los modelos están ignorados por Git. No añadas grabaciones ni canciones a un commit. Usa tu propia voz o una voz para la que tengas consentimiento; respeta los derechos de las canciones y las condiciones de cada plataforma. Identifica el audio sintético como generado y no suplantes a otras personas.
 
 Los PDF e imágenes del material de referencia no se redistribuyen aquí. La explicación y la estructura se han reescrito para este repositorio con autorización; el material de formación de base corresponde al Programa Momentum (CSIC) en colaboración con Upgrade Hub.
 
