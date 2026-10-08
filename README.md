@@ -33,6 +33,7 @@ También puedes usar `01_descargar_video_extraer_audio.ipynb` con una fuente per
 | `requirements-audio.txt` | Dependencias para el flujo de descarga y extracción. |
 | `requirements-chatterbox.txt` | Dependencias del cuaderno Chatterbox. |
 | `requirements-canto.txt` | Dependencias del flujo de Seed-VC y Demucs. |
+| `requirements-nvidia-gpu.txt` | PyTorch con CUDA 12.4 para equipos con GPU NVIDIA. |
 | `config_example.py` | Configuración pública sin enlaces privados. |
 
 ## Requisitos
@@ -55,7 +56,7 @@ py -3.11 -m venv .venv-audio
 python -m pip install -r requirements-audio.txt
 ```
 
-Instala FFmpeg por separado y verifica que `ffmpeg` y `ffprobe` se puedan ejecutar desde una terminal. Abre `01_descargar_video_extraer_audio.ipynb` y ejecuta las celdas en orden.
+Instala FFmpeg por separado y verifica que `ffmpeg` y `ffprobe` se puedan ejecutar desde una terminal. Si lo acabas de instalar, reinicia VS Code para que sus kernels hereden el `PATH` actualizado. Abre `01_descargar_video_extraer_audio.ipynb` y ejecuta las celdas en orden.
 
 La lista inicial de fuentes está vacía. Si vas a usar enlaces o archivos locales, crea `config.py` a partir de `config_example.py` y edítalo:
 
@@ -74,6 +75,7 @@ py -3.11 -m venv .venv-voz
 .\.venv-voz\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install -r requirements-chatterbox.txt
+python -m pip install -r requirements-nvidia-gpu.txt  # solo si tienes una GPU NVIDIA
 python -m ipykernel install --user --name clonacion-voz
 ```
 
@@ -88,6 +90,7 @@ py -3.10 -m venv .venv-canto
 .\.venv-canto\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install -r requirements-canto.txt
+python -m pip install -r requirements-nvidia-gpu.txt  # solo si tienes una GPU NVIDIA
 python -m ipykernel install --user --name conversion-canto
 ```
 
